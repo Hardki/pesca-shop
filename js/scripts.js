@@ -8,15 +8,42 @@ const productos = [
 
 function render() {
   app.innerHTML = `
-    <header class="header">
-      <div>🎣 Pesca Shop</div>
-      <nav class="menu">
-        <a href="#">Inicio</a>
-        <a href="#">Productos</a>
-      </nav>
-      <div>
-        <i class="fa-solid fa-cart-shopping"></i>
+    <header>
+      <div class="top-bar">
+        🔥 Envíos gratis en compras mayores a $50.000
       </div>
+
+      <div class="header">
+        <div class="logo">
+          <img src="images/chiripi-pesca-v2.png" alt="Chiripi Pesca">
+        </div>
+        <div class="form">
+          <input class="form-input" type="text" placeholder="¿Que estas buscando?">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+
+        <!-- comentado para mostrar el header sin el menu
+        <nav class="menu">
+          <a href="#">Inicio</a>
+          <a href="#">Productos</a>
+        </nav>
+         -->
+
+        <div class="acciones">
+            <a class="login" href="#">
+                <i class="fa-solid fa-circle-user"></i>
+                <span>Iniciar sesión</span>
+            </a>
+
+            <a class="whatsapp" href="#">
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
+
+            <a class="carrito" href="#">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </a>
+            
+        </div>
     </header>
 
     <section class="hero">
