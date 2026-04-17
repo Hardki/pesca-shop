@@ -1,6 +1,6 @@
 # 🎣 Chiripi Pesca
 
-Proyecto web de e-commerce desarrollado como práctica de frontend.
+Proyecto web de e-commerce desarrollado como práctica de frontend y backend.
 Simula una tienda de artículos de pesca con funcionalidades básicas de interfaz y estructura dinámica.
 
 ---
@@ -16,6 +16,8 @@ Simula una tienda de artículos de pesca con funcionalidades básicas de interfa
 * Render dinámico de productos con JavaScript
 * Diseño responsive básico con Flexbox
 * Integración de íconos con Font Awesome
+
+* Implementacion de Banners con movimiento automatico mediante una funcion contadora
 
 ---
 
@@ -39,6 +41,7 @@ Simula una tienda de artículos de pesca con funcionalidades básicas de interfa
 │── images/
 │    ├── logo.png
 │    └── chiripi.ico
+     └── shimano.jpg (banners)
 ```
 
 ---
