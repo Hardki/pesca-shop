@@ -5,12 +5,12 @@ const banners = [
     texto: "Tecnología, potencia y precisión para cada jornada"
   },
   {
-    imagen: "images/shimano.jpg",
+    imagen: "images/shimano4.jpg",
     titulo: "Shimano en acción",
     texto: "Equipos confiables para pesca deportiva"
   },
   {
-    imagen: "images/pescador.jpg",
+    imagen: "images/okuma.webp",
     titulo: "Viví la pesca de verdad",
     texto: "Todo para tu próxima aventura"
   },

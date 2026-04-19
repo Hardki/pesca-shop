@@ -55,24 +55,90 @@ function render() {
         <h2>${banners[bannerActual].titulo}</h2>
         <p>${banners[bannerActual].texto}</p>
       </div>
+      <div class="slider-dots">
+        ${banners.map((banner, index) => `
+          <span 
+            class="dot ${index === bannerActual ? "activo" : ""}"
+            onclick="irABanner(${index})">
+          </span>
+        `).join("")}
+      </div>
     </section>
 
-    <section class="hero">
-      <h2>Todo para tu próxima pesca</h2>
-      <p>Cañas, reels, señuelos y accesorios</p>
+    <section class="beneficios">
+      <div class="beneficio">
+        <i class="fa-solid fa-credit-card"></i>
+        <h3>Hasta 6 cuotas sin interés</h3>
+      </div>
+
+      <div class="beneficio">
+        <i class="fa-solid fa-truck-fast"></i>
+        <h3>Envíos rápidos a todo el país.</h3>
+      </div>
+
+      <div class="beneficio">
+        <i class="fa-solid fa-shield"></i>
+        <h3>Garantía oficial en todos los productos</h3>
+      </div>
     </section>
 
-    <section class="productos">
-      ${productos.map(p => `
-        <div class="card">
-          <h3>${p.nombre}</h3>
-          <p>$${p.precio}</p>
-          <button onclick="agregarCarrito('${p.nombre}')">
-            Agregar
-          </button>
+    <section class="destacados">
+  <h2>Conocé nuestros productos destacados</h2>
+
+  <div class="categorias">
+    ${["Reels", "Cañas", "Señuelos", "Combos", "Accesorios"].map(categoria => `
+      <button 
+        class="categoria-btn ${categoria === categoriaActual ? "activa" : ""}"
+        onclick="cambiarCategoria('${categoria}')">
+        ${categoria}
+      </button>
+    `).join("")}
+  </div>
+
+  <div class="productos-destacados">
+    ${obtenerProductosPaginados().map(producto => `
+      <div class="destacado-card">
+        <img src="${producto.imagen}" alt="${producto.nombre}">
+        <div class="destacado-info">
+          <h3>${producto.nombre}</h3>
+          <p>${producto.precio}</p>
         </div>
-      `).join("")}
+      </div>
+    `).join("")}
+  </div>
+
+  <div class="slider-dots">
+    ${Array.from({ length: obtenerCantidadPaginas() }).map((_, index) => `
+      <span
+        class="dot ${index === paginaActualProductos ? "activo" : ""}"
+        onclick="irAPaginaProductos(${index})">
+      </span>
+    `).join("")}
+  </div>
+</section>
+
+    <section class="slider">
+      <img src="images/waterdog.webp" alt="Pesca">
     </section>
+
+    <section class="destacados">
+      <h2>Conocé nuestras últimas novedades</h2>
+
+      <div class="productos-destacados">
+        ${novedades.map(producto => `
+          <div class="destacado-card">
+            <img src="${producto.imagen}" alt="${producto.alt}">
+        
+            <div class="destacado-info">
+              <h3>${producto.nombre}</h3>
+              <p>${producto.precio}</p>
+            </div>
+          </div>
+        `).join("")}
+      </div>
+    </section>
+
+    
   `;
 }
 
@@ -90,5 +156,56 @@ function siguienteBanner() {
   render();
 }
 
+function irABanner(index) {
+  bannerActual = index;
+  render();
+}
+
+let categoriaActual = "Reels";
+let paginaActualProductos = 0;
+const productosPorPagina = 6;
 render();
+const botonesCategoria = document.querySelectorAll(".categoria-btn");
+
+botonesCategoria.forEach(boton => {
+  boton.addEventListener("click", () => {
+
+    botonesCategoria.forEach(btn => {
+      btn.classList.remove("activa");
+    });
+
+    boton.classList.add("activa");
+
+  });
+});
+
+function obtenerProductosFiltrados() {
+  return productosDestacados.filter(
+    producto => producto.categoria === categoriaActual
+  );
+}
+
+function obtenerProductosPaginados() {
+  const productosFiltrados = obtenerProductosFiltrados();
+  const inicio = paginaActualProductos * productosPorPagina;
+  const fin = inicio + productosPorPagina;
+  return productosFiltrados.slice(inicio, fin);
+}
+
+function obtenerCantidadPaginas() {
+  const productosFiltrados = obtenerProductosFiltrados();
+  return Math.ceil(productosFiltrados.length / productosPorPagina);
+}
+
+function cambiarCategoria(categoria) {
+  categoriaActual = categoria;
+  paginaActualProductos = 0;
+  render();
+}
+
+function irAPaginaProductos(index) {
+  paginaActualProductos = index;
+  render();
+}
+
 setInterval(siguienteBanner, 4000);
